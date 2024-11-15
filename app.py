@@ -132,16 +132,20 @@ if uploaded_file is not None:
 
             st.subheader("Random Forest Classifier Results")
             st.write("Accuracy:", accuracy_score(y_test, y_pred_rf))
-            report_rf = classification_report(y_test, y_pred_rf, output_dict=True)  # Get the report as a dictionary
-            report_rf_df = pd.DataFrame(report_rf).transpose()  # Convert to DataFrame
-            report_rf_df = report_rf_df.round(2)  # Round to two decimal places
+            report_rf = classification_report(y_test, y_pred_rf, output_dict=True)  
+            report_rf_df = pd.DataFrame(report_rf).transpose() 
+            report_rf_df = report_rf_df.round(2)
             
             # Display as a table
             st.table(report_rf_df)
 
             st.subheader("Ensemble/bagging Results")
             st.write("Accuracy:", accuracy_score(y_test, y_pred_bagging))
-            st.text(classification_report(y_test, y_pred_bagging))
+            report_bagging = classification_report(y_test, y_pred_bagging, output_dict=True)
+            report_bagging_df = pd.DataFrame(report_bagging).transpose()
+            report_bagging_df = report_bagging_df.round(2)
+            # Display as a table
+            st.table(report_bagging_df)
 
         else:
             st.warning("Column 'Work Status' not found in the uploaded file.")
