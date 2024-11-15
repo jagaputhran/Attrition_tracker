@@ -149,3 +149,40 @@ if uploaded_file is not None:
 
         else:
             st.warning("Column 'Work Status' not found in the uploaded file.")
+
+    with tab3:
+    st.header("Prediction: Will an Employee Resign?")
+    
+    # Prediction input form
+    st.subheader("Enter Employee Details")
+    professional_level = st.selectbox("Professional Level", label_encoder_dict['Professional Level'].classes_)
+    gender = st.radio("Gender", label_encoder_dict['Gender'].classes_)
+    tenure = st.number_input("Tenure (in months)", min_value=0)
+    rating_choices = ['No Review', 'Off Track', 'Effective', 'Outstanding']
+    rating_2022 = st.selectbox("2022 Rating", rating_choices)
+    rating_2023 = st.selectbox("2023 Rating", rating_choices)
+
+    # Prediction button
+    if st.button("Predict Resignation"):
+        # Transform inputs using the loaded encoders
+        professional_level_encoded = label_encoder_dict['Professional Level'].transform([professional_level])[0]
+        gender_encoded = label_encoder_dict['Gender'].transform([gender])[0]
+        rating_2022_encoded = label_encoder_dict['2022 Rating'].transform([rating_2022])[0]
+        rating_2023_encoded = label_encoder_dict['2023 Rating'].transform([rating_2023])[0]
+
+        # Create a DataFrame for prediction
+        input_data = pd.DataFrame({
+            'Professional Level': [professional_level_encoded],
+            'Gender': [gender_encoded],
+            'Tenure': [tenure],
+            '2022 Rating': [rating_2022_encoded],
+            '2023 Rating': [rating_2023_encoded]
+        })
+
+        # Standardize the input data
+        input_data_scaled = scaler.transform(input_data)
+
+        # Make prediction
+        prediction = rf_model.predict(input_data_scaled)[0]
+        result = "Will Resign" if prediction == 1 else "Will Not Resign"
+        st.success(f"Prediction: {result}")
