@@ -123,7 +123,12 @@ if uploaded_file is not None:
             # Model Evaluation
             st.subheader("Logistic Regression Results")
             st.write("Accuracy:", accuracy_score(y_test, y_pred_log_reg))
-            st.text(classification_report(y_test, y_pred_log_reg))
+            report_log_reg = classification_report(y_test, y_pred_log_reg, output_dict=True)
+            report_log_reg_df = pd.DataFrame(report_log_reg).transpose() 
+            report_log_reg_df = report_log_reg_df.round(2)  
+            
+            # Display as a table
+            st.table(report_log_reg_df) 
 
             st.subheader("Random Forest Classifier Results")
             st.write("Accuracy:", accuracy_score(y_test, y_pred_rf))
