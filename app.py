@@ -163,7 +163,7 @@ if uploaded_file is not None:
                 le = LabelEncoder()
                 data[col] = le.fit_transform(data[col])
                 label_encoders[col] = le  # Store encoder for future use
-    
+
             # Input form
             st.subheader("Enter Employee Details")
             professional_level = st.selectbox("Professional Level", label_encoders['Professional Level'].classes_)
@@ -172,7 +172,7 @@ if uploaded_file is not None:
             rating_choices = ['No Review', 'Off Track', 'Effective', 'Outstanding']
             rating_2022 = st.selectbox("2022 Rating", rating_choices)
             rating_2023 = st.selectbox("2023 Rating", rating_choices)
-    
+
             # Prediction button
             if st.button("Predict Resignation"):
                 # Transform inputs using the local encoders
