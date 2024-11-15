@@ -150,7 +150,7 @@ if uploaded_file is not None:
         else:
             st.warning("Column 'Work Status' not found in the uploaded file.")
 
-   with tab3:
+    with tab3:
         st.header("Prediction: Will an Employee Resign?")
         
         # Reinitialize Label Encoders specific to this tab
