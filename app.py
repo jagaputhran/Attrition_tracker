@@ -31,7 +31,7 @@ if uploaded_file is not None:
     st.title("Forecasting and Classification App")
 
     # Creating Tabs
-    tab1, tab2 = st.tabs(["ARIMA Forecasting", "Classification Model"])
+    tab1, tab2 = st.tabs(["ARIMA Forecasting", "Ensemble Model"])
 
     # ARIMA Forecasting Tab
     with tab1:
