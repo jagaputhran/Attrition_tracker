@@ -36,7 +36,10 @@ if uploaded_file is not None:
     # ARIMA Forecasting Tab
     with tab1:
         st.header("ARIMA Forecasting")
-
+        if st.button("Show Dataset Info (ARIMA)"):
+            st.write(f"Number of Rows: {data.shape[0]}")
+            st.write(f"Number of Columns: {data.shape[1]}")
+            st.write(data.info())
         if 'Tenure' in data.columns:
             monthly_data = data['Tenure'].resample('M').mean()
             model = ARIMA(monthly_data, order=(1, 1, 1))
