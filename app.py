@@ -188,15 +188,23 @@ if uploaded_file is not None:
 
     
                 # Create a DataFrame for prediction
-                input_data = pd.DataFrame({
-                    'Professional Level': [professional_level_encoded],
-                    'Gender': [gender_encoded],
-                    'Tenure': [tenure],
-                    '2022 Rating': [rating_2022_encoded],
-                    '2023 Rating': [rating_2023_encoded],
-                    'Grade/Title': [grade_title_encoded],
-                    'Job Family': [job_family_encoded]
-                })
+                input_data = pd.DataFrame([[
+                professional_level_encoded,
+                gender_encoded,
+                rating_2022_encoded,
+                rating_2023_encoded,
+                grade_title_encoded,
+                job_family_encoded,
+                tenure
+            ]], columns=[
+                'Professional Level', 
+                'Gender', 
+                '2022 Rating', 
+                '2023 Rating', 
+                'Grade/Title', 
+                'Job Family', 
+                'Tenure'
+            ])
     
                 # Standardize the input data
                 input_data_scaled = scaler.transform(input_data)
