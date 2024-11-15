@@ -152,7 +152,14 @@ if uploaded_file is not None:
 
     with tab3:
         st.header("Prediction: Will an Employee Resign?")
+        rating_choices = ['No Review', 'Off Track', 'Effective', 'Outstanding']
+
+        # Manually fit encoders for the ratings
+        rating_2022_encoder = LabelEncoder()
+        rating_2022_encoder.fit(rating_choices)
         
+        rating_2023_encoder = LabelEncoder()
+        rating_2023_encoder.fit(rating_choices)
         # Reinitialize Label Encoders specific to this tab
         label_encoders = {}
         categorical_columns = ['Professional Level', 'Gender', '2022 Rating', '2023 Rating','Grade/Title','Job Family']
@@ -169,7 +176,6 @@ if uploaded_file is not None:
             professional_level = st.selectbox("Professional Level", label_encoders['Professional Level'].classes_)
             gender = st.radio("Gender", label_encoders['Gender'].classes_)
             tenure = st.number_input("Tenure (in months)", min_value=0)
-            rating_choices = ['No Review', 'Off Track', 'Effective', 'Outstanding']
             rating_2022 = st.selectbox("2022 Rating", rating_choices)
             rating_2023 = st.selectbox("2023 Rating", rating_choices)
 
