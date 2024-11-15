@@ -152,7 +152,7 @@ if uploaded_file is not None:
 
     with tab3:
         st.header("Prediction: Will an Employee Resign?")
-        rating_choices = ['No Review', 'Off Track', 'Effective', 'Outstanding']
+        rating_choices = ['Off Track', 'Effective', 'Outstanding']
 
         # Manually fit encoders for the ratings
         rating_2022_encoder = LabelEncoder()
