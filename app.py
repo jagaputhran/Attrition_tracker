@@ -126,7 +126,7 @@ if uploaded_file is not None:
             st.write("Accuracy:", accuracy_score(y_test, y_pred_rf))
             st.text(classification_report(y_test, y_pred_rf))
 
-            st.subheader("Bagging Classifier Results")
+            st.subheader("Ensemble/bagging Results")
             st.write("Accuracy:", accuracy_score(y_test, y_pred_bagging))
             st.text(classification_report(y_test, y_pred_bagging))
 
