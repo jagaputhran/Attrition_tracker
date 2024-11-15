@@ -155,7 +155,7 @@ if uploaded_file is not None:
         
         # Reinitialize Label Encoders specific to this tab
         label_encoders = {}
-        categorical_columns = ['Professional Level', 'Gender', '2022 Rating', '2023 Rating']
+        categorical_columns = ['Professional Level', 'Gender', '2022 Rating', '2023 Rating','Grade/Title','Job Family']
         
         # Check if the required columns are in the dataset
         if all(col in data.columns for col in categorical_columns):
@@ -173,6 +173,9 @@ if uploaded_file is not None:
             rating_2022 = st.selectbox("2022 Rating", rating_choices)
             rating_2023 = st.selectbox("2023 Rating", rating_choices)
 
+            grade_title_placeholder = st.selectbox("Grade/Title", label_encoders['Grade/Title'].classes_)
+            job_family_placeholder = st.selectbox("Job Family", label_encoders['Job Family'].classes_)
+
             # Prediction button
             if st.button("Predict Resignation"):
                 # Transform inputs using the local encoders
@@ -180,6 +183,9 @@ if uploaded_file is not None:
                 gender_encoded = label_encoders['Gender'].transform([gender])[0]
                 rating_2022_encoded = label_encoders['2022 Rating'].transform([rating_2022])[0]
                 rating_2023_encoded = label_encoders['2023 Rating'].transform([rating_2023])[0]
+                grade_title_encoded = label_encoders['Grade/Title'].transform([grade_title_placeholder])[0]
+                job_family_encoded = label_encoders['Job Family'].transform([job_family_placeholder])[0]
+
     
                 # Create a DataFrame for prediction
                 input_data = pd.DataFrame({
@@ -187,7 +193,9 @@ if uploaded_file is not None:
                     'Gender': [gender_encoded],
                     'Tenure': [tenure],
                     '2022 Rating': [rating_2022_encoded],
-                    '2023 Rating': [rating_2023_encoded]
+                    '2023 Rating': [rating_2023_encoded],
+                    'Grade/Title': [grade_title_encoded],
+                    'Job Family': [job_family_encoded]
                 })
     
                 # Standardize the input data
